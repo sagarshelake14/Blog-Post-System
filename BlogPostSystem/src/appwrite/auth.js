@@ -13,7 +13,7 @@ export class AuthService {
                   this.account = new Account(this.client);
          }
 
-
+         // create account
          async createAccount({email, password, name}){
                   try {
                            const userAccount = await this.account.create(ID.unique(), email, password, name);
@@ -29,6 +29,7 @@ export class AuthService {
                   }
          }
 
+         // Login
          async login({email, password}){
                   try {    
                            return await this.account.createEmailPasswordSession(email, password);
@@ -37,6 +38,7 @@ export class AuthService {
                   }
          }
 
+         // Logout
          async logout() {
                   try {
                            await this.account.deleteSessions();
@@ -45,6 +47,7 @@ export class AuthService {
                   }
          }
 
+         // getting a user
          async getCurrentUser() {
                   try {
                            return await this.account.get();

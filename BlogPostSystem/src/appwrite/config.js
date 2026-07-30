@@ -1,7 +1,7 @@
 import conf from "../conf/conf";
 import { Client, ID, Databases, Storage, Query } from "appwrite";
 
-export class Services {
+export class Service {
          client = new Client();
          databases;
          bucket;
@@ -44,7 +44,7 @@ export class Services {
                                     conf.appwriteCollectionId,
                                     slug,
 
-                                    {
+                                    { 
                                              title,
                                              content,
                                              featuredImage,
@@ -103,7 +103,7 @@ export class Services {
          //File upload related services
 
          //upload file
-         async uploadFile(file){
+         async uploadFile(file){   // actual file
                   try {
                            return await this.bucket.createFile(
                                     conf.appwriteBucketId,
@@ -139,5 +139,5 @@ export class Services {
 }
 
 
-const service = new Services();
-export default services;
+const service = new Service();
+export default service;

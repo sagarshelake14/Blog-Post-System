@@ -13,7 +13,7 @@ export class AuthService {
                   this.account = new Account(this.client);
          }
 
-         // create account
+         // create account  (register user)
          async createAccount({email, password, name}){
                   try {
                            const userAccount = await this.account.create(ID.unique(), email, password, name);
@@ -32,6 +32,7 @@ export class AuthService {
          // Login
          async login({email, password}){
                   try {    
+                            //const user = await account.get();
                            return await this.account.createEmailPasswordSession(email, password);
                   } catch (error) {
                            throw error

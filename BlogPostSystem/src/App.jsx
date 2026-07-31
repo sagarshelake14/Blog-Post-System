@@ -11,13 +11,14 @@ function App() {
   const [loading, setLoading] = useState(true); // conditional rendering
   const dispatch = useDispatch();
 
+  // getting a current user
   useEffect(() => {
-    authService.getCurrentUser()
+    authService.getCurrentUser()   // getCurrentUser() is service
     .then((userData) => {
       if(userData){
-        dispatch(login({userData}));
+        dispatch(login({userData}));  // login() is state
       } else{
-        dispatch(logout());
+        dispatch(logout());       //logout() is also state
       }
     })
     .finally(() => setLoading(false));  

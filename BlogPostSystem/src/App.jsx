@@ -32,6 +32,9 @@ function App() {
          TODO : {/* <Outlet /> */}
         </main>
         <Footer />
+        <div>
+          
+        </div>
       </div>
     </div>
   ): null 

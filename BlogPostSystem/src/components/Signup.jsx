@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 
 
 function Signup() {
+    
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function Signup() {
                   if(userData){
                            const userData = await authService.getCurrentUser(data);
                            if(userData){
-                                    dispatch(login(userData));
+                                dispatch(login(userData));
                            }
                            navigate("/");
                   }

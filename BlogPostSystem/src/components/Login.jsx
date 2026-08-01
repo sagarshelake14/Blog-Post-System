@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import { login as authLogin } from '../store/authSlice'   // state 
 import {Button, Input, Logo} from './index'
 import { useDispatch } from 'react-redux'
-import authService from '../appwrite/auth'
+import authService from '../appwrite/auth'    //service
 import {useForm} from 'react-hook-form'
 
 function Login() {
-  const navigate = useNavigate();
+  const navigate = useNavigate();   // forcefully navigate
   const dispatch = useDispatch();
   const {register, handleSubmit} = useForm(); // react hook form
   const [error, setError] = useState("");     
@@ -22,7 +22,7 @@ function Login() {
                            if(userData){
                                     dispatch(authLogin(userData)) // login() state
                            }
-                           navigate("/")
+                           navigate("/")   // navigate to root
                   }
          } catch (error) {
                   setError(error.message);
@@ -61,7 +61,7 @@ function Login() {
                     validate: {
                         matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                         "Email address must be a valid address",
-                  }
+                }
                 })}
                 />
 
@@ -77,7 +77,7 @@ function Login() {
                 <Button
                 type="submit"
                 className="w-full"
-                >Sign in</Button>
+                >Sign In</Button>
             </div>
         </form>
         </div>

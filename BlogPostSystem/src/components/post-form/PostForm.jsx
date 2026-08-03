@@ -23,18 +23,18 @@ function PostForm({post}) {
   });
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   const submit  = async (data) => {
     if(post){      // Edit post
         // uploadFile service returns uploded file information
-        const file = data.image[0] ? appwriteService.uploadFile(data.image[0]): null
+        const file = data.image[0] ? await ppwriteService.uploadFile(data.image[0]): null
         
         if(file){
-          appwriteService.deleteFile(post.featuredImage)
+          await appwriteService.deleteFile(post.featuredImage)
         }
 
-        const dbPost = appwriteService.updatePost(post.$id, {
+        const dbPost = await appwriteService.updatePost(post.$id, {
           ...data,
           featuredImage: file ? file.$id : undefined,
         })
@@ -51,7 +51,7 @@ function PostForm({post}) {
           data.featuredImage = fileId;
           const dbPost = await appwriteService.createPost({
             ...data,
-            userId = userData.$id
+            userId : userData.$id
           }); 
           if(dbPost){
             navigate(`/post/${dbPost.$id}`);
@@ -66,7 +66,7 @@ function PostForm({post}) {
       return value
       .trim()
       .toLowerCase()
-      .replace(/^[a-zA-Z\d\s]+/g, '-')
+      .replace(/[^a-zA-Z\d\s]+/g, "-")
       .replace(/\s/g, '-')
     }
     return ''
@@ -74,15 +74,18 @@ function PostForm({post}) {
 
 
   React.useEffect(() => {
-    const subscription = watch((value, {name}) => {   // value is object
-      if(name === title){
-        setValue('slug', slugTransform(value.title, {shouldValidate: true}));
-      }
+    const subscription = watch((value, { name }) => {
+        if (name === "title") {
+            setValue(
+                "slug",
+                slugTransform(value.title),
+                { shouldValidate: true }
+            );
+        }
     });
-    return () => {
-      subscription.unsubscribe(); // memory management of useEffect();
-    }
-  }, [watch, slugTransform, setValue])
+
+    return () => subscription.unsubscribe();
+}, [watch, slugTransform, setValue]);
 
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">

@@ -1,43 +1,55 @@
-import { useState, useEffect } from 'react'
-import {useDispatch} from 'react-redux'
-import authService from './appwrite/auth'
-import './App.css'
-import { login, logout } from './store/authSlice';
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import { Outlet } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import authService from "./appwrite/auth";
+import { login, logout } from "./store/authSlice";
+
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+
+import "./App.css";
 
 function App() {
-  const [loading, setLoading] = useState(true); // conditional rendering
-  const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
 
-  // getting a current user
-  useEffect(() => {
-    authService.getCurrentUser()   // getCurrentUser() is service
-    .then((userData) => {
-      if(userData){
-        dispatch(login({userData}));  // login() is state
-      } else{
-        dispatch(logout());       //logout() is also state
-      }
-    })
-    .finally(() => setLoading(false));  
-  }, [])
+    useEffect(() => {
+        const checkUser = async () => {
+            try {
+                const userData = await authService.getCurrentUser();
 
-  return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-      <div className='w-full block'>
-        <Header />
-        <main>
-         TODO : {/* <Outlet /> */}
-        </main>
-        <Footer />
-        <div>
-          
+                if (userData) {
+                    dispatch(login(userData));
+                } else {
+                    dispatch(logout());
+                }
+            } catch (error) {
+                console.log(error);
+                dispatch(logout());
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        checkUser();
+    }, [dispatch]);
+
+    if (loading) {
+        return <h2>Loading...</h2>;
+    }
+
+    return (
+        <div className="min-h-screen flex flex-col bg-gray-400">
+            <Header />
+
+            <main className="flex-grow">
+                <Outlet />
+            </main>
+
+            <Footer />
         </div>
-      </div>
-    </div>
-  ): null 
+    );
 }
 
-export default App
+export default App;

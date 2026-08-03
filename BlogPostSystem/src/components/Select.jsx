@@ -3,7 +3,7 @@ import React, {useId} from 'react'
 function Select({
          options,
          label,
-         classname = "",
+         className = "",
          ...props
 }, ref) {
   const id = useId();

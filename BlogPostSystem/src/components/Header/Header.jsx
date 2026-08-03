@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 function Header() {
-  const authStatus = useSelector((state) => state.auth.status)   // it checks user authenticated or not ?
+  const authStatus = useSelector((state) => state.auth.status);   // it checks user authenticated or not ?
   const navigate = useNavigate();
 
   const navItems = [

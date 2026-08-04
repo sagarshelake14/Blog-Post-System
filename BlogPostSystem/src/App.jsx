@@ -20,12 +20,13 @@ function App() {
                 const userData = await authService.getCurrentUser();
 
                 if (userData) {
-                    dispatch(login(userData));
+                    // Pass as an object payload { userData } to match authSlice logic
+                    dispatch(login({ userData }));
                 } else {
                     dispatch(logout());
                 }
             } catch (error) {
-                console.log(error);
+                console.log("App :: checkUser :: error", error);
                 dispatch(logout());
             } finally {
                 setLoading(false);
@@ -36,7 +37,11 @@ function App() {
     }, [dispatch]);
 
     if (loading) {
-        return <h2>Loading...</h2>;
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-400">
+                <h2 className="text-2xl font-bold">Loading...</h2>
+            </div>
+        );
     }
 
     return (

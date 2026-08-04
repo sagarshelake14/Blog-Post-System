@@ -1,19 +1,19 @@
-// creating realtime editor as seperate component
 import React from 'react'
 import {Editor } from '@tinymce/tinymce-react';
-import {Controller } from 'react-hook-form';  // it help to use RTE in react hook form  
-// It is used to take references in any form
+import {Controller } from 'react-hook-form';
 
-export default function RTE({name, control, label, defaultValue = ""}) {  
+
+export default function RTE({name, control, label, defaultValue =""}) {
   return (
     <div className='w-full'> 
     {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
 
     <Controller
     name={name || "content"}
-    control={control}    // it used as parameter when RTE is called. it is responsible for managing a state
+    control={control}
     render={({field: {onChange}}) => (
         <Editor
+        apiKey="pjsd18q7hdoht8nrvtvtqey5z2ihwhhfk46x5ydm6t24v60y"
         initialValue={defaultValue}
         init={{
             initialValue: defaultValue,
@@ -45,7 +45,7 @@ export default function RTE({name, control, label, defaultValue = ""}) {
             "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
         }}
-        onEditorChange={onChange}  
+        onEditorChange={onChange}
         />
     )}
     />

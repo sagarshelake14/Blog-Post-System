@@ -136,19 +136,23 @@ export class Service {
         }
     }
 
-    // Get File Preview
     getFilePreview(fileId) {
-        if (!fileId) {
-            console.error("Appwrite service :: getFilePreview :: File ID is missing");
-            return "";
-        }
+        if (!fileId) return "";
+        return this.bucket.getFileView(
+            conf.appwriteBucketId,
+            fileId
+        );
+    }
 
-        return this.bucket.getFilePreview(
+    getFileView(fileId) {
+        if (!fileId) return "";
+        return this.bucket.getFileView(
             conf.appwriteBucketId,
             fileId
         );
     }
 }
+
 
 const service = new Service();
 

@@ -50,14 +50,14 @@ export class AuthService {
 
          // getting a user
         async getCurrentUser() {
-        try {
-                return await this.account.get();
-        } catch (error) {
-        // Return null when no user is logged in instead of letting the error uncaught
-                console.log("Appwrite service :: getCurrentUser :: Guest user or no active session");
-                return null;
+                try {
+                        return await this.account.get();
+                } catch (error) {
+                
+                        console.log("Appwrite service :: getCurrentUser :: Guest user or no active session");
+                        return null;
+                }
         }
-}
 }
 
 const authService = new AuthService();

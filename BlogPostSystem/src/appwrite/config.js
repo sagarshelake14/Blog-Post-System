@@ -138,7 +138,7 @@ export class Service {
 
     getFilePreview(fileId) {
         if (!fileId) return "";
-        return this.bucket.getFileView(
+        return this.bucket.getFilePreview(
             conf.appwriteBucketId,
             fileId
         );
@@ -153,7 +153,5 @@ export class Service {
     }
 }
 
-
 const service = new Service();
-
 export default service;

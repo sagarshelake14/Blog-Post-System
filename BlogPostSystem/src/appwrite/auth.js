@@ -50,17 +50,13 @@ export class AuthService {
 
          // getting a user
         // auth.js
-        async getCurrentUser() {
-        try {
-                return await this.account.get();
-        } catch (error) {
-                // Appwrite throws error when no active session exists (Guest state)
-                if (error.code === 401) {
-                return null; // Return null safely instead of throwing
+       async getCurrentUser() {
+                try {
+                        return await this.account.get();
+                } catch (error) {
+                        console.log("No active session");
+                        return null;
                 }
-                console.log("Appwrite service :: getCurrentUser :: error", error);
-        }
-                return null;
         }
 }
 

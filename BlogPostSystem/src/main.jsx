@@ -8,12 +8,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { store } from "./store/store";
 
 import App from "./App";
-import Home from "./pages/Home";
+import Home from '../src/Pages/Home'
 import SignUp from "./Pages/SignUp";
-import AddPost from "./pages/AddPost";
-import EditPost from "./pages/EditPost";
-import Post from "./pages/Post";
-import AllPosts from "./pages/AllPosts";
+import AddPost from "../src/Pages/AddPost";
+import EditPost from "../src/Pages/EditPost";
+import Post from "../src/Pages/Post";
+import AllPosts from "../src/Pages/AllPosts";
 
 import { AuthLayout, Login } from "./components";
 

@@ -34,3 +34,12 @@ A modern and responsive **Blog Post Management System** built with **React.js** 
 - Appwrite Authentication
 - Appwrite Database
 - Appwrite Storage
+
+### username and Passwords
+user 1 :
+username: four@gmail.com
+password: 12345678
+
+user 2 :
+username: five@gmail.com
+password: 1234567890
